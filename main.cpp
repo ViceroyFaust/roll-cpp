@@ -1,6 +1,5 @@
 #include <iostream>
 #include <string>
-#include <random>
 
 /* TODO
  * - Take a single line of input and parse it
@@ -16,8 +15,7 @@ std::string getUserInput() {
     return output;
 }
 
-int main()
-{
+int main() {
     std::cout << "Dice Roller" << std::endl;
     std::cout << getUserInput() << std:: endl;
     return 0;
