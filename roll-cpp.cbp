@@ -32,6 +32,8 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="dice.cpp" />
+		<Unit filename="dice.h" />
 		<Unit filename="main.cpp" />
 		<Extensions />
 	</Project>

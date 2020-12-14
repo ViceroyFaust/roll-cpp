@@ -8,6 +8,13 @@
  * - print result to user's screen
  */
 
+ struct die {
+    int num;
+    int sides;
+    char oper;
+    int val;
+ };
+
 std::string getUserInput() {
     std::string output;
     std::cout << "> ";
@@ -17,6 +24,6 @@ std::string getUserInput() {
 
 int main() {
     std::cout << "Dice Roller" << std::endl;
-    std::cout << getUserInput() << std:: endl;
+    parseNotation(getUserInput());
     return 0;
 }
