@@ -35,19 +35,25 @@ die parseNotation(std::string toParse) {
     for (int i = 0; i < toParse.length(); i++) {
         switch (progress) {
             case NUMBER:
-                if (toParse.at(i) == 'd') {
-                    toReturn.num = std::stoi(stringNum);
+                 if (toParse.at(i) == 'd') {
                     progress = SIDES;
-                    stringNum = "";
+                    if (stringNum.length() > 0) {
+                        toReturn.num = std::stoi(stringNum);
+                        stringNum = "";
+                    }
                 } else {
                     stringNum += toParse.at(i);
                 }
                 break;
             case SIDES:
-                if (toParse.at(i) == '+') {
+                if (toParse.at(i) == '+' || toParse.at(i) == '-' ||
+                    toParse.at(i) == '*' || toParse.at(i) == '/') {
+                    progress = OPERAND;
                     toReturn.sides = std::stoi(stringNum);
-                    toReturn.oper = toParse.at(i);
                     stringNum = "";
+                    toReturn.oper = toParse.at(i);
+                } else if (i == toParse.length()) {
+                    toReturn.sides = std::stoi(stringNum);
                 } else {
                     stringNum += toParse.at(i);
                 }
@@ -57,7 +63,14 @@ die parseNotation(std::string toParse) {
                 break;
         }
     }
-    toReturn.val = std::stoi(stringNum);
+    switch (progress) {
+        case SIDES:
+            toReturn.sides = std::stoi(stringNum);
+            break;
+        case OPERAND:
+            toReturn.val = std::stoi(stringNum);
+            break;
+    }
 
     return toReturn;
 }
@@ -65,6 +78,9 @@ die parseNotation(std::string toParse) {
 int main() {
     std::cout << "Dice Roller" << std::endl;
     die playerDie = parseNotation(getUserInput());
-    std::cout << playerDie.num << std::endl << playerDie.sides << std::endl << playerDie.oper << std::endl << playerDie.val << std::endl;
+    std::cout << "Amt. of Dice: " << playerDie.num << std::endl;
+    std::cout << "Num. of Sides: " << playerDie.sides << std::endl;
+    std::cout << "Operator (if applicable): " << playerDie.oper << std::endl;
+    std::cout << "Modifier Num: " << playerDie.val << std::endl;
     return 0;
 }
