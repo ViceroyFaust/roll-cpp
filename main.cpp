@@ -32,38 +32,41 @@ die parseNotation(std::string toParse) {
     };
     state progress{NUMBER};
 
-    for (int i = 0; i < toParse.length(); i++) {
+    for (size_t i = 0; i < toParse.length(); i++) {
         switch (progress) {
             case NUMBER:
-                 if (toParse.at(i) == 'd') {
+                 if (toParse[i] == 'd') {
                     progress = SIDES;
                     if (stringNum.length() > 0) {
                         toReturn.num = std::stoi(stringNum);
                         stringNum = "";
                     }
                 } else {
-                    stringNum += toParse.at(i);
+                    stringNum += toParse[i];
                 }
                 break;
             case SIDES:
-                if (toParse.at(i) == '+' || toParse.at(i) == '-' ||
-                    toParse.at(i) == '*' || toParse.at(i) == '/') {
+                if (toParse[i] == '+' || toParse[i] == '-' ||
+                    toParse[i] == '*' || toParse[i] == '/') {
                     progress = OPERAND;
                     toReturn.sides = std::stoi(stringNum);
                     stringNum = "";
-                    toReturn.oper = toParse.at(i);
+                    toReturn.oper = toParse[i];
                 } else if (i == toParse.length()) {
                     toReturn.sides = std::stoi(stringNum);
                 } else {
-                    stringNum += toParse.at(i);
+                    stringNum += toParse[i];
                 }
                 break;
             case OPERAND:
-                stringNum += toParse.at(i);
+                stringNum += toParse[i];
                 break;
         }
     }
     switch (progress) {
+        case NUMBER:
+            // toReturn.num = std::stoi(stringNum);
+            break;
         case SIDES:
             toReturn.sides = std::stoi(stringNum);
             break;
