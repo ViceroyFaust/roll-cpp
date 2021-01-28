@@ -79,11 +79,12 @@ die parseNotation(std::string toParse) {
 }
 
 int main() {
+    /*
     std::cout << "Dice Roller" << std::endl;
     die playerDie = parseNotation(getUserInput());
     std::cout << "Amt. of Dice: " << playerDie.num << std::endl;
     std::cout << "Num. of Sides: " << playerDie.sides << std::endl;
     std::cout << "Operator (if applicable): " << playerDie.oper << std::endl;
-    std::cout << "Modifier Num: " << playerDie.val << std::endl;
+    std::cout << "Modifier Num: " << playerDie.val << std::endl; */
     return 0;
 }
