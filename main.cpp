@@ -1,21 +1,8 @@
 #include <iostream>
 #include <string>
+#include "dice.h"
 
-/* TODO
- * - Take a single line of input and parse it
- *  + Either dice notation or exit
- * - produce random output and do calculations
- * - print result to user's screen
- */
-
- struct die {
-    int num;
-    int sides;
-    char oper;
-    int val;
- };
-
- // returns a line of user input via string
+// returns a line of user input via string
 std::string getUserInput() {
     std::string output;
     std::cout << "> ";
@@ -27,6 +14,7 @@ std::string getUserInput() {
 die parseNotation(std::string toParse) {
     std::string stringNum{""}; // String representation of a number before casting
     die toReturn;
+    toReturn.num = 1; // So the program knows to roll one dice in case it's "d2" or something like that
     enum state { // Tracks the parser's progress
         NUMBER, SIDES, OPERAND
     };
@@ -79,12 +67,15 @@ die parseNotation(std::string toParse) {
 }
 
 int main() {
-    /*
-    std::cout << "Dice Roller" << std::endl;
-    die playerDie = parseNotation(getUserInput());
-    std::cout << "Amt. of Dice: " << playerDie.num << std::endl;
-    std::cout << "Num. of Sides: " << playerDie.sides << std::endl;
-    std::cout << "Operator (if applicable): " << playerDie.oper << std::endl;
-    std::cout << "Modifier Num: " << playerDie.val << std::endl; */
+    bool exit = false;
+    std::cout << "Dice Roller\nPlease enter Dice Notation:\n";
+    while (!exit) {
+        std::string input = getUserInput();
+        if (input != "exit") {
+            std::cout << roll(parseNotation(input)) << std::endl;
+        } else {
+            exit = true;
+        }
+    }
     return 0;
 }

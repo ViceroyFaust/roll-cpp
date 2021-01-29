@@ -1,35 +1,29 @@
 #include <stdlib.h>
+#include "dice.h"
 
-int roll(int amt, int sides, char oper, int val) {
+int roll(die toThrow) {
     int number{0};
-    for (int i = 0; i < amt; i++) {
-        int toss = 1 + rand() % sides;
-        switch (oper) {
+    int toss;
+    for (int i = 0; i < toThrow.num; i++) {
+        toss = 1 + rand() % toThrow.sides;
+        switch (toThrow.oper) {
             case '+':
-                toss += val;
+                toss += toThrow.val;
                 break;
             case '-':
-                toss -= val;
+                toss -= toThrow.val;
                 break;
             case '*':
-                toss *= val;
+                toss *= toThrow.val;
                 break;
             case '/':
-                toss /= val;
+                toss /= toThrow.val;
                 break;
             default:
-                toss = 0;
+                break;
 
         }
         number += toss;
     }
     return number;
-}
-
-int roll(int amt, int sides) {
-    return roll(amt, sides, 0, 0);
-}
-
-int roll(int sides) {
-    return roll(1, sides, 0, 0);
 }
