@@ -14,7 +14,12 @@ std::string getUserInput() {
 die parseNotation(std::string toParse) {
     std::string stringNum{""}; // String representation of a number before casting
     die toReturn;
-    toReturn.num = 1; // So the program knows to roll one dice in case it's "d2" or something like that
+    // Setting Default values (old values interfere with new ones)
+    toReturn.num = 1;
+    toReturn.sides = 1;
+    toReturn.oper = 0;
+    toReturn.val = 0;
+
     enum state { // Tracks the parser's progress
         NUMBER, SIDES, OPERAND
     };
